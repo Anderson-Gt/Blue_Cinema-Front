@@ -1,0 +1,127 @@
+.banner {
+    height: 50vh;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.select-seats{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.banner::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, #0f0f0f, rgba(0, 0, 0, 0));
+}
+.movie-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -200px;
+    position: relative;
+    padding: 0 2rem;
+}
+.movie-content__poster {
+    flex: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .movie-content__poster {
+        display: none;
+    }
+  }
+
+
+.movie-content__poster__img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-top: 165%;
+}
+.movie-content__info {
+    width: 70%;
+    padding-left: 2rem;
+    position: relative;
+    
+}
+
+
+.movie-content__info > * {
+    margin-bottom: 2rem;
+}
+@media only screen and (max-width: 1024px) {
+    .movie-content__info {
+      width: 100%;
+    }
+  }
+.movie-content__info .title {
+    font-size: 4rem;
+    line-height: 1;
+}
+.movie-content__info .movie-content__info > * ~ * {
+    margin-left: 0.5rem;
+    
+}
+.movie-content__info .gender__item, .format__item, .duration__item {
+    margin-left: 0.4rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    background-color: #0f0f0f;
+}
+
+.movie-content__info .ticketValue{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+.movie-content__info .button_dropdown .schedule_{
+    margin-left: 0.4rem;
+    margin-right: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+   
+    border-radius: 30px;
+ 
+
+    border: 3px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: unset;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.movie-content__info .button_dropdown .schedule_:hover{
+    box-shadow: unset;
+    color: #1059ff;
+    background-color: #fff;
+}
+
+.movie-content__info .synopsis{
+    font-size: 20px;
+}
+
+

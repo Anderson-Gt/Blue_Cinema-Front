@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap");
+
 /* Reset styles */
-html,body, body * { 
+.LoginRegister * { 
     box-sizing: border-box; 
-    font-family: 'Open Sans', sans-serif; 
+    font-family: "Montserrat", sans-serif; 
     margin:0;
     padding:0;
     color:inherit;
@@ -9,8 +11,7 @@ html,body, body * {
     /*border:2px solid orange;*/
  }
 
- body {
-    background: url(/src/assets/images/background.jpg);
+ .LoginRegister {    
     background-size:cover;
     background-position: center;
     min-height: 100vh;
@@ -20,7 +21,7 @@ html,body, body * {
     justify-content:space-evenly;
     
   }
-  .container {
+  .LoginRegister .container {
       width: 10%;
       padding-top: 20px;
       padding-bottom: 10px;
@@ -96,6 +97,12 @@ html,body, body * {
     .form-group label {
       text-transform: uppercase;
     }
+
+    input[type="number"]{
+        -webkit-appearance: textfield !important;
+        -moz-appearance:textfield !important;
+    }
+
     input.submit {
         font-weight: 400;
         text-transform: uppercase;
