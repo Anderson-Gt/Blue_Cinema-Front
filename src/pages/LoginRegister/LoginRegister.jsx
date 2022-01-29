@@ -57,9 +57,9 @@ function LoginForm (){
     return(
       <div>
         <label name='userEmail'>Correo de usuario</label>
-        <input type='email' name="email" value={email} onChange={onChangeEmail} required={true} placeholder="Ingrese su email" id='userEmail'/>
+        <input type='email' name="email" value={email} onChange={onChangeEmail} required="true" placeholder="Ingrese su email" id='userEmail'/>
         <label name='password'>Contraseña</label>
-        <input type="password" name="password" value={password} onChange={onChangePassword} required={true} placeholder="Ingrese su contraseña" minLength="5" id="password"/>
+        <input type="password" name="password" value={password} onChange={onChangePassword} required="true" placeholder="Ingrese su contraseña" minLength="5" id="password"/>
         <button onClick={handleLogin} className='button'>Iniciar sesion</button>
       </div>
     )

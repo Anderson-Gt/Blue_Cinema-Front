@@ -27,11 +27,22 @@ button {
     box-shadow: unset;
     transition: color 0.3s ease, background-color 0.3s ease;
 }
-
 .btn-outline:hover {
     box-shadow: unset;
     color: #1059ff;
     background-color: #fff;
+}
+.btn-delete {
+    border: 3px solid rgb(221, 4, 4);
+    background-color: transparent;
+    color: #fff;
+    box-shadow: unset;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.btn-delete:hover {
+    box-shadow: unset;
+    color: #fff;
+    background-color: rgb(221, 4, 4);
 }
 
 .btn.small {

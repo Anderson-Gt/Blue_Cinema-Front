@@ -5,20 +5,18 @@ import {Route, Switch} from 'react-router-dom';
 import Home from '../pages/Home';
 import Catalog from '../pages/Catalog';
 import Detail from '../pages/Detail/Detail';
-import App from '../App';
+import Reserves from '../components/Reserves/Reserves';
 
 const Routes = () => {
     return(
         <Switch>
-            
-         
             <Route
                 path='/:category/:id'
                 component={Detail}
             />
             <Route
                 path='/reserves'
-                component={Home}
+                component={Reserves}
             />
             <Route
                 path='/billboard'

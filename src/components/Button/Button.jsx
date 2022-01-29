@@ -25,6 +25,17 @@ export const OutlineButton = props => {
     );
 }
 
+export const DeleteButton = props => {
+    return(
+            <Button
+            className={`btn-delete ${props.className}`}
+            onClick={props.onClick ? () => props.onClick() : null}
+        >
+            {props.children}
+        </Button>
+    );
+}
+
 Button.propTypes = {
     onClick: PropTypes.func
 }

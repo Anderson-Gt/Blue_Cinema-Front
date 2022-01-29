@@ -6,7 +6,7 @@ import './movie-grid.css';
 import MovieCard from '../Movie-Card/MovieCard';
 import userService from '../../api/services/user.service';
 
-const MovieGrid = props => {
+const MovieGrid = () => {
 
     const [items, setItems] = useState([]);
     
@@ -15,15 +15,11 @@ const MovieGrid = props => {
         const getList = async () => {
             try{
                 const response = await userService.getMoviesOnBillboard();
-                setItems(response);
-                
+                setItems(response);                
             }catch{
                 console.log('error');
                 
             }
-
-            
-        
         }
         getList();
     }, []);

@@ -24,14 +24,22 @@ const userService = {
         const url = 'movies/'+id;
         return axiosClient.get(url, {headers: authHeader()});
     },
+    getUserName: () => {
+        const url = 'reserves/name';
+        return axiosClient.get(url,{headers: authHeader(), params: {email: userService.getEmailCurrentUser()}});
+    },
     getUserReserves: () => {
         const url = 'reserves/usermail';
         return axiosClient.get(url,{headers: authHeader(), params: {email: userService.getEmailCurrentUser()}});
     },
-    getReservedChairs: () => {
+    getReservedChairs: (idSchedule, idMovie) => {
         const url = 'reserves/chairs'
-        return axiosClient.get(url, {headers: authHeader()});
-    }  
+        return axiosClient.get(url, {headers: authHeader(), params: {idSchedule: idSchedule, idMovie: idMovie}});
+    } ,
+    getSchedule: (idSchedule) => {
+        const url = 'reserves/schedule';
+        return axiosClient.get(url, {headers: authHeader(), params: {idSchedule: idSchedule}});
+    } 
 }
 
 export default userService;

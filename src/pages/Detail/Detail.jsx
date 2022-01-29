@@ -10,12 +10,24 @@ import Button, { OutlineButton } from '../../components/Button/Button';
 
 import './detail.css';
 
+function presentations(schedules){
+    var response = null;
+    
+    if(schedules.length===0){
+        response = <option>No hay</option>;
+
+    }else{
+         response = schedules.map((id) => 
+         <option key={id.idSchedule.toString()}>{id.time} </option>
+         )
+    }	
+    return response
+}
+
 const Detail = () => {
 
     const [activeModal, setActiveModal] = useState(false);
-
     const { id } = useParams();
-
     const [item, setItem] = useState(null);
 
     useEffect(() => {
@@ -23,6 +35,7 @@ const Detail = () => {
             const response = await userServie.getMovieDetail(id);
             setItem(response);
             window.scrollTo(0, 0);
+            
         }
         getDetail();
     }, [id]);
@@ -30,6 +43,7 @@ const Detail = () => {
     const setModalActive = async () => {
         setActiveModal(true);
     }
+    
 
     return (
         <>
@@ -59,14 +73,12 @@ const Detail = () => {
                                 </div>
                                 <div className="synopsis">{item.synopsis}</div>
                                 <div className="ticketValue">Valor de la boleta: {formatNumber(item.ticketValue)} COP</div>
+                                {/* <div>{presentations(item.schedules)}</div> */}
                                 <div className="button_dropdown">
-                                    {
-                                        <select className="schedule_" id="schedule" required={true}>
-                                            <option defaultValue disabled>Horarios Disponibles</option>
-                                            <option>12:00 pm</option>
-                                            <option>3:00 pm</option>
-                                            <option>6:00 pm</option>
-                                            <option>9:00 pm</option>
+                                    {   
+                                        <select className="schedule_" defaultValue="" required>
+                                            <option value="" disabled>Horarios Disponibles</option>
+                                            {presentations(item.schedules)}
                                         </select>
                                     }
                                     {

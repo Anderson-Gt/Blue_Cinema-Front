@@ -8,9 +8,7 @@ const Catalog = () => {
 
     return (
         <>
-            <PageHeader>
-                Peliculas en cartelera
-            </PageHeader>
+            <PageHeader></PageHeader>
             <div className="container">
                 <div className="section mb-3">
                     <MovieGrid />
