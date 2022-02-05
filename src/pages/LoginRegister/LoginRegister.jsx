@@ -46,7 +46,7 @@ function LoginForm (){
             error.toString();
 
           setMessage(resMessage);
-          console.log("error iniciando sesión");
+          console.log(error.response.status);
         }
       );
     };

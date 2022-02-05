@@ -49,10 +49,25 @@
   }
 }
 
-.header__nav, .usrBtn {
+.header__nav {
   display: flex;
   align-items: center;
   justify-content: unset;
+}
+
+.usrBtn{
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: transparent;
+  margin: 0;
+}
+
+.usrBtn:hover{
+  color: #1059ff;
 }
 
 @media only screen and (max-width: 600px) {

@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link, useLocation } from 'react-router-dom';
 import authService from '../../api/services/auth.service';
+import userService from '../../api/services/user.service';
 import logo from '../../assets/tmovie.png';
 import './header.css';
+
 
 const headerNav = [
     {
@@ -24,6 +26,7 @@ const Header = () => {
     let history = useHistory();
     const { pathname } = useLocation();
     const headerRef = useRef(null);
+    const [name, setName] = useState("");
 
     const active = headerNav.findIndex(e => e.path === pathname);
 
@@ -34,6 +37,17 @@ const Header = () => {
     }
 
     useEffect(() => {
+
+        const getName = async () => {
+            try {
+                const name = await userService.getUserName();
+                setName(name);
+            } catch {
+                console.log("error");
+            }
+        }
+        getName();
+
 
         const shrinkHeader = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -66,9 +80,9 @@ const Header = () => {
                         ))
                     }
                 </ul>
-                <select className="usrBtn">
-                    <option disabled>USUARIO</option>
-                    <option>Mi Perfil</option>
+                <select className="usrBtn" defaultValue="usr">
+                    <option value="usr" disabled>{name}</option>
+                    <option>Mi perfil</option>
                     <option type="submit" onClick={handleLogout}>Salir</option>
                 </select>
             </div>

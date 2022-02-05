@@ -97,7 +97,7 @@ const Detail = () => {
 
                                             }
                                             {
-                                                <OutlineButton>Cancelar</OutlineButton>
+                                                <OutlineButton onClick={setActiveModal}>Cancelar</OutlineButton>
                                             }
                                         </div>
                                           

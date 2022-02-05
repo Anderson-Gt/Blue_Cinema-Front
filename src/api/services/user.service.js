@@ -39,7 +39,12 @@ const userService = {
     getSchedule: (idSchedule) => {
         const url = 'reserves/schedule';
         return axiosClient.get(url, {headers: authHeader(), params: {idSchedule: idSchedule}});
-    } 
+    },
+    
+    deleteReserve: (idReserve) => {
+        const url = 'reserves/delete/'+idReserve;
+        return axiosClient.delete(url, {headers: authHeader()});
+    }
 }
 
 export default userService;
