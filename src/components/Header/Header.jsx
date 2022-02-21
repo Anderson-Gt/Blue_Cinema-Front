@@ -5,6 +5,7 @@ import authService from '../../api/services/auth.service';
 import userService from '../../api/services/user.service';
 import logo from '../../assets/tmovie.png';
 import './header.css';
+import {BiMenu, BiLogOut, BiCog, BiUser} from "react-icons/bi";
 
 
 const headerNav = [
@@ -22,11 +23,17 @@ const headerNav = [
     }
 ];
 
+
+
 const Header = () => {
+
+  
+
     let history = useHistory();
     const { pathname } = useLocation();
     const headerRef = useRef(null);
     const [name, setName] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const active = headerNav.findIndex(e => e.path === pathname);
 
@@ -35,6 +42,8 @@ const Header = () => {
         history.push('/');
         window.location.reload();
     }
+   
+   
 
     useEffect(() => {
 
@@ -42,6 +51,10 @@ const Header = () => {
             try {
                 const name = await userService.getUserName();
                 setName(name);
+
+                const admin = await userService.getRolesCurrentUser().includes("ROLE_ADMIN");
+                setIsAdmin(admin);
+                
             } catch {
                 console.log("error");
             }
@@ -80,14 +93,40 @@ const Header = () => {
                         ))
                     }
                 </ul>
-                <select className="usrBtn" defaultValue="usr">
-                    <option value="usr" disabled>{name}</option>
-                    <option>Mi perfil</option>
-                    <option type="submit" onClick={handleLogout}>Salir</option>
-                </select>
+                <div className="dropdown">
+                    <button className="dropbtn" onClick={myFunction}>
+                        {name}  
+                        <BiMenu className="icon" size='1.5em'/>                        
+                    </button>
+                    <div className="dropdown-content" id="myDropdown">
+                        <a><BiUser size='1.2rem'/> Mi perfil</a>
+                        {isAdmin===true &&
+                            <a><BiCog size='1.2rem'/> Administrar</a>
+                        }
+                        
+                        <a onClick={handleLogout}><BiLogOut size='1.2rem'/> Salir</a>
+                    </div>
+
+                </div>
             </div>
         </div>
     );
 }
+
+const myFunction = () => {
+    document.getElementById("myDropdown").classList.toggle("show");      
+}
+
+window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown !=null && myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+      else{
+      }
+    }
+  }
+
 
 export default Header;

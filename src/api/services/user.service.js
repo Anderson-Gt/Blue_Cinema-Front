@@ -40,10 +40,20 @@ const userService = {
         const url = 'reserves/schedule';
         return axiosClient.get(url, {headers: authHeader(), params: {idSchedule: idSchedule}});
     },
+
+    createReserve:(idMovie, idSchedule, chairs) => {
+        const url = 'reserves/create';
+        return axiosClient.post(url,{email: userService.getEmailCurrentUser(), idMovie: idMovie, idSchedule: idSchedule, chairs: chairs},{headers: authHeader()});
+    },
     
     deleteReserve: (idReserve) => {
         const url = 'reserves/delete/'+idReserve;
         return axiosClient.delete(url, {headers: authHeader()});
+    },
+
+    updateReserve: (idReserve, chairs) => {
+        const url = 'reserves/update/'+idReserve;
+        return axiosClient.put(url, {chairs: chairs}, {headers: authHeader()});
     }
 }
 

@@ -1,44 +1,65 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import clsx from 'clsx'
 import './seats.css'
 import userService from "../../api/services/user.service";
 import Button, { OutlineButton } from '../../components/Button/Button';
-import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
+
 
 
 const seats = Array.from({ length: 5 * 8 }, (_, i) => i + 1);
 
-const Seats = props => {
-  let history = useHistory();
-  const [selectedSeats, setSelectedSeats] = useState([]);
-
-  const item = props.item;
-  const idSchedule = parseInt(props.idSchedule);
+const EditSeats = props => {
+  const [item, setItem] = useState(props.item);
+  const seatss = item.chairs.map((x)=>x.idChair);  
+  const [selectedSeats, setSelectedSeats] = useState(seatss);  
   const [chairs, setChairs] = useState([]);
 
-  
-  const close = () => {
-    setSelectedSeats([]);
-    props.closeModal();    
+  const update = async () => {
+    try{
+      setItem(props.item);
+      const seatt = props.item.chairs.map((x)=>x.idChair);
+      setSelectedSeats(seatt);
+
+      userService.getReservedChairs(props.idSchedule, props.item.movies.idMovie).then((lista) =>{
+        const list = lista
+        for(let i=0;i < selectedSeats.length; i++){
+          list.splice(list.indexOf(selectedSeats[i]),1);
+        }
+        setChairs(list);
+      }  
+      )
+
+      
+    }
+    catch{
+    }
   }
 
-  useEffect(()=>{setSelectedSeats([])}, [props.modal]);
+   useEffect(update,[props.item, props.modal]);
+  
+  const close = () => {
+    update();
+    setSelectedSeats(seatss);
+    props.onClose();
+  }
 
-  const createReserve = () => {
+  const editReserve = () => {
 
-    userService.createReserve(item.idMovie, idSchedule, selectedSeats).then(
+    userService.updateReserve(item.idReserve, selectedSeats).then(
       () => {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Se ha registrado tu reserva',
+          title: 'Reserva #'+item.idReserve+' modificada',
           background: '#0f0f0f',
           color:'white',
           showConfirmButton: false,
           timer: 1800
         })
-        history.push('/billboard');
+        props.update();
+        close();
+        
 
       },
       (error) => {
@@ -47,33 +68,22 @@ const Seats = props => {
     )
   }
 
-  const getReservedChairs = async () => {
-    try{
-      const listReservedChairs = await userService.getReservedChairs(idSchedule, item.idMovie);
-      setChairs(listReservedChairs);
-    }
-    catch{
-      console.log("error");
-    }
-  }
-
-  useEffect(getReservedChairs, [idSchedule, item.idMovie]);
 
   return (
     <div className="Seats">
-      <h2 className="title-value">{item.title} - {formatNumber(item.ticketValue)} COP</h2>
+      <h2 className="title-value">{item.movies.title} - {formatNumber(item.movies.ticketValue)} COP</h2>
       <ShowCase />
       <Cinema
         movie={chairs}
         selectedSeats={selectedSeats}
         onSelectedSeatsChange={selectedSeats => setSelectedSeats(selectedSeats)}
       />
-      <PriceCalculator data={selectedSeats} price={item.ticketValue}></PriceCalculator>
+      <PriceCalculator data={selectedSeats} price={item.movies.ticketValue}></PriceCalculator>
       {selectedSeats.length !== 0 &&
 
         <div className="buttons">
           {
-            <Button onClick={createReserve}>Reservar</Button>
+            <Button onClick={editReserve}>Aceptar</Button>
 
           }
           {
@@ -87,7 +97,7 @@ const Seats = props => {
   )
 }
 
-export default Seats;
+export default EditSeats;
 
 const ShowCase = () => {
   return (
@@ -178,10 +188,3 @@ const Cinema = ({ movie, selectedSeats, onSelectedSeatsChange }) => {
     </div>
   )
 }
-
-
-
-
-
-
-

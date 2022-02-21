@@ -3,6 +3,7 @@ import background from '../../assets/images/background.jpg';
 
 import userService from '../../api/services/user.service';
 import AuthService from '../../api/services/auth.service';
+import Swal from 'sweetalert2';
 
 import {useSpring, animated} from 'react-spring';
 
@@ -15,14 +16,20 @@ function LoginForm (){
 
   let history = useHistory();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    const [email, setEmail] = useState({value: "", hasError: false});
+    const [password, setPassword] = useState({value: "",hasError: false});
     
     const onChangeEmail = (e) => {
       const email = e.target.value;
       setEmail(email);
     };
+
+    function handleBlurEmail(){
+      const emailRegexp = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
+      const hasError = email == "" || !emailRegexp.test(email.value);
+      console.log(hasError)
+     
+    }
 
     const onChangePassword = (e) => {
       const password = e.target.value;
@@ -31,22 +38,33 @@ function LoginForm (){
 
     const handleLogin = (e) => {
       e.preventDefault();
-      setMessage("");
       
       AuthService.login(email, password).then(
         () => {
+          Swal.fire({
+            position: 'top-end',
+            title: 'Bienvenido a BlueCinema!',
+            background: '#1059ff',
+            color:'#0f0f0f',
+            showConfirmButton: false,
+            timer: 2000
+          })
          history.push("/home");
         },
         (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
-          console.log(error.response.status);
+          Swal.fire({
+            icon: 'error',
+            iconColor: 'rgb(248, 24, 24)',
+            title: 'Oops...',
+            text: 'Error iniciando sesión, verifica que tus datos esten correctos!',
+            background: '#0f0f0f',
+            color:'white',
+            confirmButtonColor: '#1059ff' 
+             })
+            
+             setEmail({value: ""});
+             setPassword({value: ""});
+             
         }
       );
     };
@@ -55,13 +73,17 @@ function LoginForm (){
     
   
     return(
-      <div>
+      <form>
         <label name='userEmail'>Correo de usuario</label>
-        <input type='email' name="email" value={email} onChange={onChangeEmail} required="true" placeholder="Ingrese su email" id='userEmail'/>
+        <input type='email' name="email" value={email.value} onChange={onChangeEmail} onBlur={handleBlurEmail} aria-errormessage="emailErrorID" aria-invalid={email.hasError} required="true" placeholder="Ingrese su email" id='userEmail'/>
+        <p id="msgID" aria-live="assertive" style={{ visibility: email.hasError ? "visible" : "hidden" }}>
+        Please enter a valid email
+      </p>
+        
         <label name='password'>Contraseña</label>
-        <input type="password" name="password" value={password} onChange={onChangePassword} required="true" placeholder="Ingrese su contraseña" minLength="5" id="password"/>
-        <button onClick={handleLogin} className='button'>Iniciar sesion</button>
-      </div>
+        <input type="password" name="password" value={password.value} onChange={onChangePassword} required="true" placeholder="Ingrese su contraseña" minLength="5" id="password"/>
+        <button type="submit" onClick={handleLogin} className='button'>Iniciar sesion</button>
+      </form>
     )
   }
 
@@ -69,7 +91,7 @@ function LoginForm (){
 function RegisterForm(){ 
 
     return(
-      <div action="">
+      <React.Fragment>
         <label name="documentType">Tipo de documento</label>
         <select id="documentType" required={true}>
         <option defaultValue disabled>Selecciona</option>
@@ -90,7 +112,7 @@ function RegisterForm(){
         <label name="confirmPassword">Confirmar Contraseña</label>
         <input name="confirmpass" id="confirmpass" type="password" required={true} placeholder ="Repita su contraseña" minLength="5" id="confirmPassword"/>
         <input type='submit' value='Registrarme' className='submit'/>      
-      </div>
+      </React.Fragment>
     )
   }
 
@@ -130,6 +152,7 @@ const LoginRegister = () => {
 }
 
 export default LoginRegister;
+
 
 
 

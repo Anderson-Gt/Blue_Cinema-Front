@@ -19,7 +19,7 @@
   visibility: visible;
 }
 .modal__content {
-  padding: 2rem;
+  padding: 1rem;
   background-color: #0f0f0f;
   width: 60%;
   height: 80%;
