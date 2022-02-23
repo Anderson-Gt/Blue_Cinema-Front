@@ -25,7 +25,7 @@ const Footer = () => {
                         <Link to="/">Acerca de Cidenet</Link>
                     </div>
                     <div className="footer__content__menu">
-                        <Link to="/">Políticas de privacidad</Link>
+                        <Link to="/">Documentación API</Link>
                     </div>
                 </div>
             </div>

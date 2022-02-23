@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Catalog from '../pages/Catalog';
 import Detail from '../pages/Detail/Detail';
 import Reserves from '../components/Reserves/Reserves';
+import MovieAdmin from '../components/Movie-Admin/MovieAdmin';
 
 const Routes = () => {
     return(
@@ -21,6 +22,10 @@ const Routes = () => {
             <Route
                 path='/billboard'
                 component={Catalog}
+            />
+            <Route
+                path='/admin'
+                component={MovieAdmin}
             />
              <Route
                 path='/home'

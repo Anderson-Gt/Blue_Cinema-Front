@@ -1,17 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap");
+ @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Monoton&family=Zen+Tokyo+Zoo&display=swap');
 
-/* Reset styles */
-.LoginRegister * { 
-    box-sizing: border-box; 
-    font-family: "Montserrat", sans-serif; 
-    margin:0;
-    padding:0;
-    color:inherit;
-    background-color:inherit;
-    /*border:2px solid orange;*/
- }
 
- .LoginRegister {    
+
+ .LoginRegister {
+   
+  box-sizing: border-box; 
+  font-family: "Montserrat", sans-serif; 
+  margin:0;
+  padding:0;
+  color:inherit;
+  background-color:inherit;
+  
+   
     background-size:cover;
     background-position: center;
     min-height: 100vh;
@@ -21,11 +22,25 @@
     justify-content:space-evenly;
     
   }
+  
   .LoginRegister .container {
+
       width: 10%;
       padding-top: 20px;
       padding-bottom: 10px;
   }
+
+  .logo-log {
+    font-size: 2.5rem;
+    font-weight: 600;
+   
+    display:table-column;
+    align-items: center;
+    justify-content: unset;
+    font-family: 'Monoton', cursive;  
+  }
+
+  
 
 
   .login-register {
@@ -40,7 +55,6 @@
       border-radius: 10px;
   }
   
-  /* Nav buttons */
   .nav-buttons {
     width: 100%;
     height: 70px;
@@ -48,22 +62,25 @@
     opacity: 1;
     margin-bottom: 3em;
   }
-  button {
+  
+  .nav-buttons button {
       font-size: 1.5em;
-      margin-right:1em;
+      margin-right:1rem;
       border:0px;
       cursor: pointer;
+      background-color: transparent;
+      color: white;
    
   }
-  button:focus {
+  .nav-buttons button:focus {
       outline: 0px;
   }
-  button.active {
+  .nav-buttons button.active {
       padding-bottom: 10px;
       border-bottom: solid 2px #1059FF;
   } 
+
   
-   /* footer: forgot section */
    .forgot-panel {
     position: relative;
     height: 100px;
@@ -74,18 +91,34 @@
     border-top: solid 1px rgba(255, 255, 255, 0.048);    
 }
 
-    /* form styling */
+
     .form-group input {
         width: 100%;
         height: 29px;
         padding-left: 15px;
-        border: none;
+        border: 1px solid transparent;
         border-radius: 5px;
-        margin-bottom: 15px;
+        margin-bottom: -2px;
         background: rgba(255, 255, 255, 0.336);
     }
+    
+    .form-group input:focus {
+      border-color: #1059FF;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 0 2px #1059FF;
+      outline: none;
+    }
+    
+    .form-group input.error {
+      border-color: red;
+    } 
+    
+    .form-group .input-feedback {
+      color: red;
+      
+    }
 
-    .form-group select{
+
+  .form-group select{
         width: 100%;
         height: 29px;
         padding-left: 15px;
@@ -97,13 +130,14 @@
     .form-group label {
       text-transform: uppercase;
     }
+    
 
     input[type="number"]{
         -webkit-appearance: textfield !important;
         -moz-appearance:textfield !important;
     }
 
-    input.submit {
+    /* input.submit {
         font-weight: 400;
         text-transform: uppercase;
         font-size: 1em;
@@ -117,11 +151,11 @@
         margin-top: -8px;
         background-color: rgba(16,89,255, 1);
     
-    }
+    }*/
 
-    /*Form positioning and animation */
 
     form#registerform {
+        margin-top: 60px;
         left:500px;
         top:-230px;
         position:relative;
@@ -139,4 +173,23 @@
     #loginBtn, #registerBtn {
         transition: all .2s ease;
 
-    }
+    } 
+   
+      
+      button:disabled {
+        opacity: .5;
+        cursor: not-allowed !important;
+      }
+      
+     
+      
+    
+       
+
+
+
+
+
+      
+
+

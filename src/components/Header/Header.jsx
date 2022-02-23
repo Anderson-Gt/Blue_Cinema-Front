@@ -41,8 +41,7 @@ const Header = () => {
         authService.logout();
         history.push('/');
         window.location.reload();
-    }
-   
+    }   
    
 
     useEffect(() => {
@@ -101,7 +100,7 @@ const Header = () => {
                     <div className="dropdown-content" id="myDropdown">
                         <a><BiUser size='1.2rem'/> Mi perfil</a>
                         {isAdmin===true &&
-                            <a><BiCog size='1.2rem'/> Administrar</a>
+                            <Link to="/admin" ><BiCog size='1.2rem'/> Administrar</Link>
                         }
                         
                         <a onClick={handleLogout}><BiLogOut size='1.2rem'/> Salir</a>

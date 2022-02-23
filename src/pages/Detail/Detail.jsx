@@ -28,8 +28,8 @@ const Detail = () => {
         getDetail();
     }, [id]);
 
-    const desactiveModal = () =>{
-        setActiveModal(false);        
+    const desactiveModal = () => {
+        setActiveModal(false);
     }
 
     const setModalActive = async () => {
@@ -81,7 +81,27 @@ const Detail = () => {
                                             <select id="schedule_" className="schedule_" defaultValue="" required onChange={updateSchedule}>
                                                 <option value="" disabled hidden>Horarios Disponibles</option>
                                                 {
-                                                    item.schedules.map((id) => <option key={id.idSchedule} value={id.idSchedule}>{id.time}</option>)
+                                                    item.schedules.map((id) => {
+                                                        if (id) {
+                                                            let hour = Number(id.time.slice(0, 2));
+                                                            let systemHour = new Date();
+                                                            const actualHour = Number(systemHour.getHours().toString());
+                                                            
+                                                            if (hour !== 12) {
+                                                                hour = hour + 12;
+                                                                if (hour > actualHour) {
+                                                                    return <option key={id.idSchedule} value={id.idSchedule}>{id.time}</option>
+                                                                }
+                                                            } else {
+                                                                if (hour > actualHour) {
+                                                                    return <option key={id.idSchedule} value={id.idSchedule}>{id.time}</option>
+
+
+                                                                }
+                                                            }
+                                                        }
+
+                                                    })
                                                 }
                                             </select>
                                         }
@@ -93,15 +113,15 @@ const Detail = () => {
                                 </div>
 
                                 <div>{schedule != null &&
-                                     <Modal active={activeModal}>
+                                    <Modal active={activeModal}>
                                         <ModalContent onClose={desactiveModal}>
                                             <h2 className="select-seats">Selecciona tus asientos</h2>
-                                            <Seats  item={item} idSchedule={schedule} closeModal={desactiveModal} modal={activeModal}></Seats>
+                                            <Seats item={item} idSchedule={schedule} closeModal={desactiveModal} modal={activeModal}></Seats>
                                         </ModalContent>
 
                                     </Modal>
-                                        
-                                        }
+
+                                }
 
 
                                 </div>

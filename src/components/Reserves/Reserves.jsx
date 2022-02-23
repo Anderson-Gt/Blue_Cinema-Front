@@ -34,7 +34,6 @@ const Reserves = () => {
 const ReserveGrid = () => {
     const [items, setItems] = useState([]);
     const [message, setMessage] = useState("");
-
     const getList = async () => {
         try {
             const response = await userService.getUserReserves();
@@ -92,7 +91,7 @@ const ReserveCard = props => {
 
 
         Swal.fire({
-            title: 'Eliminar Reserva #'+item.idReserve,
+            title: 'Eliminar Reserva #'+item.idReserve+'?',
             text: "Tus sillas reservadas quedarán libres",
             icon: 'warning',
             iconColor: 'rgb(248, 24, 24)',
