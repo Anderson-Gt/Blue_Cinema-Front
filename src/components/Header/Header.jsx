@@ -5,8 +5,8 @@ import authService from '../../api/services/auth.service';
 import userService from '../../api/services/user.service';
 import logo from '../../assets/tmovie.png';
 import './header.css';
-import {BiMenu, BiLogOut, BiCog, BiUser} from "react-icons/bi";
-
+import { BiMenu, BiLogOut, BiCog, BiUser } from "react-icons/bi";
+import Swal from 'sweetalert2';
 
 const headerNav = [
     {
@@ -27,13 +27,14 @@ const headerNav = [
 
 const Header = () => {
 
-  
+
 
     let history = useHistory();
     const { pathname } = useLocation();
     const headerRef = useRef(null);
     const [name, setName] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
+    const [email] = useState(userService.getEmailCurrentUser());
 
     const active = headerNav.findIndex(e => e.path === pathname);
 
@@ -41,8 +42,20 @@ const Header = () => {
         authService.logout();
         history.push('/');
         window.location.reload();
-    }   
-   
+    }
+
+    const userProfile = () => {
+        Swal.fire({
+            icon: 'info',
+            title: 'Información del Usuario',
+            html: `<div><strong>Nombre: </strong>` + name + `</div>
+            <div><strong>Correo: </strong>`+ email + `</div>`,
+            background: '#0f0f0f',
+            color: 'white',
+            confirmButtonColor: '#1059ff'
+        })
+    }
+
 
     useEffect(() => {
 
@@ -53,7 +66,7 @@ const Header = () => {
 
                 const admin = await userService.getRolesCurrentUser().includes("ROLE_ADMIN");
                 setIsAdmin(admin);
-                
+
             } catch {
                 console.log("error");
             }
@@ -94,16 +107,16 @@ const Header = () => {
                 </ul>
                 <div className="dropdown">
                     <button className="dropbtn" onClick={myFunction}>
-                        {name}  
-                        <BiMenu className="icon" size='1.5em'/>                        
+                        {name}
+                        <BiMenu className="icon" size='1.5em' />
                     </button>
                     <div className="dropdown-content" id="myDropdown">
-                        <a><BiUser size='1.2rem'/> Mi perfil</a>
-                        {isAdmin===true &&
-                            <Link to="/admin" ><BiCog size='1.2rem'/> Administrar</Link>
+                        <a onClick={userProfile}><BiUser size='1.2rem' /> Mi perfil</a>
+                        {isAdmin === true &&
+                            <Link to="/admin" ><BiCog size='1.2rem' /> Administrar</Link>
                         }
-                        
-                        <a onClick={handleLogout}><BiLogOut size='1.2rem'/> Salir</a>
+
+                        <a onClick={handleLogout}><BiLogOut size='1.2rem' /> Salir</a>
                     </div>
 
                 </div>
@@ -113,19 +126,19 @@ const Header = () => {
 }
 
 const myFunction = () => {
-    document.getElementById("myDropdown").classList.toggle("show");      
+    document.getElementById("myDropdown").classList.toggle("show");
 }
 
-window.onclick = function(e) {
+window.onclick = function (e) {
     if (!e.target.matches('.dropbtn')) {
-    var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown !=null && myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-      }
-      else{
-      }
+        var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown != null && myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+        }
+        else {
+        }
     }
-  }
+}
 
 
 export default Header;

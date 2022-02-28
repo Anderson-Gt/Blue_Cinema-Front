@@ -14,8 +14,11 @@
 
 
 @media only screen and (max-width: 1024px) {
-    .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    .reserve-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    .image{
+        display: none;
     }
   }
 
@@ -103,6 +106,10 @@
 
 .edit-icon, .delete-icon{
     pointer-events: none;
+}
+
+.resBtns button{
+    margin: 5px;
 }
 
 

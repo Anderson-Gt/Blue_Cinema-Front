@@ -149,7 +149,7 @@ const ReserveCard = props => {
                         <h4 className="chairs_code">Código Sillas: {listItems}</h4>
                         <h4 className="price_item">Valor: {formatNumber(item.totalPrice)}</h4>
                     </div>
-                    <div>
+                    <div className="resBtns">
                         {
                             <button className="edit-button" onClick={setModalActive}><BiPencil className="edit-icon" /> Editar</button>
 

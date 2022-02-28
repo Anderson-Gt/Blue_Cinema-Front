@@ -1,4 +1,9 @@
 
+.adminMessage {
+    padding: 0rem 0 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
 .adminMovies{
     margin-left: 0.6rem;
 }
@@ -40,6 +45,11 @@
 
 .admin-btns{
     display: flex;
+    justify-content: center;
+}
+
+.admin-btns button{
+    margin: 3px;
 }
 
 
@@ -77,4 +87,71 @@
 
 .edit-i, .delete-i{
     pointer-events: none;
+}
+
+.movieForm{
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    display:grid;
+}
+
+.movieForm input {
+    color: inherit;
+    width: 100%;
+    height: 29px;
+    padding-left: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.212);
+  }
+
+.movieForm textarea{
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.212);
+
+}
+
+
+.movieForm input:focus {
+    border-color: #1059ff;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 2px #1059ff;
+    outline: none;
+  }
+  
+  .movieForm input.error {
+    border-color: red;
+  }
+  
+  .movieForm .input-feedback {
+    color: red;
+  }
+  
+  .movieForm select {
+    color: inherit;
+    width: 100%;
+    height: 29px;
+    padding-left: 15px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.212);
+  }
+  .movieForm label {
+    text-transform: uppercase;
+  }
+  
+.title-genre, .format-duration, .poster-ticket, .schedule-check{
+    display: inline-flex;    
+}
+
+.pair{
+    margin-right: 30px;
+}
+
+.billboardC{
+    margin-left: 20px;
 }

@@ -7,6 +7,7 @@ import Catalog from '../pages/Catalog';
 import Detail from '../pages/Detail/Detail';
 import Reserves from '../components/Reserves/Reserves';
 import MovieAdmin from '../components/Movie-Admin/MovieAdmin';
+import ProtectedRoute from './ProtectedRoute';
 
 const Routes = () => {
     return(
@@ -23,7 +24,7 @@ const Routes = () => {
                 path='/billboard'
                 component={Catalog}
             />
-            <Route
+            <ProtectedRoute
                 path='/admin'
                 component={MovieAdmin}
             />

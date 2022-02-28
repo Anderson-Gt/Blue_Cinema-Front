@@ -18,6 +18,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+.footer__content__menus:hover{
+  cursor: pointer;
+}
 
 @media only screen and (max-width: 600px) {
   .footer__content__menus {
@@ -37,3 +40,39 @@
 .footer__content__menu > * ~ * {
   margin-top: 1rem;
 }
+
+.cidenetLogo{
+  display: flex;
+  justify-content: center;
+}
+
+.cidenetLogo img {
+  margin: 10px;
+  width: 30%;
+}
+
+.titleCidenet{
+  margin: 20px;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 23px;
+  color: rgba(66 107 168 / 100%);
+}
+
+.pCidenet{
+  font-family: 'Lato', sans-serif !important;
+  margin: 10px;
+  font-size: 20px;
+}
+
+.pBlueC, .list{
+  margin: 20px;
+}
+
+.gratefulness{
+  display: flex;
+  justify-content: center;
+}
+.list{
+  justify-content: center;
+}
+

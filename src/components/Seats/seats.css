@@ -129,10 +129,13 @@
 }
 
 .buttons{
-  margin-top: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
+}
+
+.buttons button{
+  margin: 10px;
 }
 
 

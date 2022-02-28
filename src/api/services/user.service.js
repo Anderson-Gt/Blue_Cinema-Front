@@ -1,8 +1,21 @@
 import axiosClient from "../axiosClient";
 import authHeader from "./auth-header";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 const userService = {
+    createUser: (documentType, documentNumber, names, surnames, email, password)=>{
+        const url = 'users/new';
+        return axiosClient.post(url, {documentType: documentType, documentNumber: documentNumber, names: names, surnames: surnames, email: email, password: password});
+    },
+    createMovie: (title, gender, synopsis, format, duration, image, billboard, ticketValue, schedules) => {
+        const url = 'movies/create';
+        return axiosClient.post(url, {title: title, gender: gender, synopsis: synopsis, format: format, duration: duration, image: image, billboard: billboard, ticketValue: ticketValue, schedules: schedules}, {headers: authHeader()});
+    },
+    updateMovie:(idMovie, title, gender, synopsis, format, duration, image, billboard, ticketValue, schedules) => {
+        const url = 'movies/update/'+idMovie;
+        return axiosClient.put(url, {title: title, gender: gender, synopsis: synopsis, format: format, duration: duration, image: image, billboard: billboard, ticketValue: ticketValue, schedules: schedules}, {headers: authHeader()});
+    }, 
     getEmailCurrentUser: () =>{
         return jwtDecode(JSON.parse(localStorage.getItem("user")).token).sub;
         
@@ -14,7 +27,10 @@ const userService = {
         const url = 'movies/all' ;
         return axiosClient.get(url,{headers: authHeader()});
     },
-
+    deleteMovie: (id) => {
+        const url = 'movies/delete/'+id;
+        return axiosClient.put(url,{},{headers: authHeader()});
+    },
     getMoviesOnBillboard: () => {
         const url = 'movies/billboard' ;
         return axiosClient.get(url,{headers: authHeader()});
